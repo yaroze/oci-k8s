@@ -1,0 +1,231 @@
+  title: oci-k8s
+  description: "This stack deploys a Kubernetes cluster on Oracle Cloud Infrastructure (OCI) using Terraform."
+  stackDescription: "This stack deploys a Kubernetes cluster on Oracle Cloud Infrastructure (OCI) using Terraform."
+  schemaVersion: 1.0.0
+  version: "20250214"
+  locale: "en"
+
+  variableGroups:
+  - title: General Configuration
+    visible: false
+    variables:
+    - tenancy_ocid
+
+  - title: Compartment Configuration
+    visible: true
+    variables:
+    - new_compartment_name
+
+  - title: Kubernetes
+    visible: true
+    variables:
+    - cluster_name
+    - kubernetes_version
+    - node_availability_domain
+    - node_fault_domains
+    - node_count
+    - node_shape
+    - node_cpu
+    - node_memory
+    - node_linux_version
+    - node_image_ocid
+    - ssh_public_key
+
+
+  - title: Networking
+    visible: true
+    variables:
+    - vcn_cidr_block
+    - worker_subnet_cidr_block
+    - api_subnet_cidr_block
+    - pod_subnet_cidr_block
+    - service_subnet_cidr_block
+    
+  variables:
+
+    tenancy_ocid:
+      type: oci:identity:tenancy:id
+      description: The Oracle Cloud Infrastructure tenancy OCID.
+      required: true
+      visible: false
+      
+    new_compartment_name:
+      type: string
+      title: Compartment name
+      description: The name for the new compartment.
+      required: true
+      visible: true
+      default: "k8s-compartment"
+      
+    cluster_name:
+      type: string
+      title: Cluster name
+      description: The name for the cluster.
+      required: true
+      visible: true
+      default: "k8s01"
+
+    kubernetes_version:
+      title: Kubernetes version
+      description: The Oracle cloud kubernetes version.
+      type: oci:kubernetes:versions:id
+      required: true
+      visible: true
+      dependsOn:
+        compartmentId: ${tenancy_ocid}
+        clusterOptionId: "all"
+
+    node_image_ocid:
+      title: Node image OCID
+      description: The OCID of the image to use for the Kubernetes nodes. Leave empty for auto selection.
+      type: string
+      required: false
+      visible: true
+      default: ""
+
+    ssh_public_key:
+      title: SSH public key
+      description: Public SSH key to be included in the ~/.ssh/authorized_keys file for the default user on the instance
+      # renders variable as an SSH key control
+      type: oci:core:ssh:publickey
+      additionalProps:
+        allowMultiple: true
+      required: false
+      default: [""]
+      pattern: "((^(ssh-rsa AAAAB3NzaC1yc2|ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNT|ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzOD|ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1Mj|ssh-ed25519 AAAAC3NzaC1lZDI1NTE5|ssh-dss AAAAB3NzaC1kc3)[0-9A-Za-z+\/]+[=]{0,3})( [^,]*)?)(,((ssh-rsa AAAAB3NzaC1yc2|ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNT|ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzOD|ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1Mj|ssh-ed25519 AAAAC3NzaC1lZDI1NTE5|ssh-dss AAAAB3NzaC1kc3)[0-9A-Za-z+\/]+[=]{0,3})( [^,]*)?)*$"
+      
+    vcn_cidr_block:
+      title: VCN CIDR Block
+      description: The CIDR block for the VCN.
+      type: string
+      required: true
+      visible: true
+      default: "10.0.0.0/16"
+
+    worker_subnet_cidr_block:
+      title: Worker Subnet CIDR Block
+      description: The CIDR block for the worker subnet.
+      type: string
+      required: true
+      visible: true
+      default: "10.0.1.0/24"
+
+    api_subnet_cidr_block:
+      title: API Subnet CIDR Block
+      description: The CIDR block for the API subnet.
+      type: string
+      required: true
+      visible: true
+      default: "10.0.0.0/30"
+        
+    pod_subnet_cidr_block:
+      title: Pod Subnet CIDR Block
+      description: The CIDR block for the pod subnet.
+      type: string
+      required: true
+      visible: true
+      default:  "10.244.0.0/16"
+
+    service_subnet_cidr_block:
+      title: Service Subnet CIDR Block
+      description: The CIDR block for the service subnet.
+      type: string
+      required: true
+      visible: true
+      default: "10.0.2.0/24"
+      
+    node_linux_version:
+      title: Node Linux Version
+      description: The version of the Oracle Linux image to use for the Kubernetes nodes.
+      type: string
+      required: true
+      visible: true
+      default: "8"
+      
+    cni_type:
+      title: CNI Type
+      description: The type of CNI to use for the Kubernetes cluster.
+      type: string
+      required: true
+      visible: false
+      default: "FLANNEL_OVERLAY"
+      
+    node_availability_domain:
+      title: Node Availability Domain
+      description: The availability domain for the Kubernetes nodes.
+      type: oci:identity:availabilitydomain:name
+      required: true
+      visible: complexExpression
+      dependsOn:
+        compartmentId: ${tenancy_ocid}
+
+    node_fault_domains:
+      type: oci:identity:faultdomain:name
+      title: Node Fault Domains
+      description: The fault domains for the Kubernetes nodes.
+      required: false
+      visible: true
+      default: ["FAULT-DOMAIN-1", "FAULT-DOMAIN-2", "FAULT-DOMAIN-3"]
+      additionalProps:
+        allowMultiple: true
+      dependsOn:
+        compartmentId: ${tenancy_ocid}
+        availabilityDomainName: ${node_availability_domain}
+
+    node_count:
+      title: Node Count
+      description: The number of nodes for the Kubernetes cluster.
+      type: integer
+      required: true
+      visible: true
+      default: 2
+      minimum: 1
+      maximum: 100
+      multipleOf: 1
+
+    node_shape:
+      title: Node Shape
+      description: The shape for the Kubernetes nodes - https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm#flexible.
+      type: oci:core:instanceshape:name
+      required: true
+      visible: true
+      dependsOn:
+        compartmentId: ${tenancy_ocid}
+
+    node_cpu:
+      title: Node oCPU
+      description: The number of oCPU for each node.
+      type: integer
+      required: true
+      visible: true
+      minimum: 1
+      maximum: 192
+      multipleOf: 1
+      default: 2
+
+    node_memory:
+      title: Node Memory (GB)
+      description: The amount of memory for each node.
+      type: integer
+      required: true
+      visible: true
+      default: 8
+      minimum: 2
+      maximum: 192
+      multipleOf: 1
+
+  outputGroups:
+    - title: Kubernetes configuration
+      visible: true
+      outputs:
+      - kubeconfig
+
+  outputs:
+    kubeconfig:
+      title: Kubeconfig
+      description: The kubeconfig file for the Kubernetes cluster.
+      type: copyableString
+      required: true
+      visible: true
+      default: ""
+      sensitive: true

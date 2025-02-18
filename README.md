@@ -1,5 +1,7 @@
 # OCI-K8s
 
+[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s/archive/refs/tags/deploy_to_oci.zip)
+
 This project deploys a Basic Kubernetes Cluster on OCI, using Terraform.
 
 ## Disclaimer
@@ -27,7 +29,7 @@ It won't work on AWS, GCE, DigitalOcean or any other cloud or on-premises deploy
 
 
 
-**DISCLAIMER** - Before jumping into running `tofu apply`, be sure of what you're doing.
+**DISCLAIMER** - Before jumping into running `tofu apply`, or clicking the "Deploy to Oracle Cloud" button, be sure of what you're doing.
 I'm not responsible for any charges on your credit card, or if anything breaks or goes bananas. You are the sole responsible for this code and you accept these conditions.
 This means this software is provided as-is, **without any explicit or implicit warranties**.
 
