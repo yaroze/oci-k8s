@@ -37,6 +37,14 @@ resource "oci_core_security_list" "service_lb_sec_list" {
     stateless        = "false"
   }
 
+  egress_security_rules {
+    description      = "Allow the load balancers to egress with the Internet."
+    destination      = "0.0.0.0/0"
+    destination_type = "CIDR_BLOCK"
+    protocol         = "6"
+    stateless        = "false"
+  }
+
 }
 
 resource "oci_core_security_list" "worker_sec_list" {
