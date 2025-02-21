@@ -38,7 +38,7 @@ resource "oci_core_route_table" "routetable-workernodes" {
 
   route_rules {
     description       = "traffic to OCI services"
-    destination       = "all-fra-services-in-oracle-services-network"
+    destination       = oci_core_service_gateway.oke_service_gateway.services.0.service_name
     destination_type  = "SERVICE_CIDR_BLOCK"
     network_entity_id = oci_core_service_gateway.oke_service_gateway.id
   }
