@@ -46,3 +46,4 @@ tofu/plan.out
 # Kubeconfig
 tofu/kubeconfig
 tofu-k8s/plan.out
+provider-localconfig.tf
