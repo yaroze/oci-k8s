@@ -1,6 +1,6 @@
 resource "oci_identity_policy" "kubernetes_policy" {
 
-  compartment_id = oci_identity_compartment.compartment.id
+  compartment_id = var.tenancy_ocid
   description    = "Policy for Kubernetes clusters"
   name           = "KubernetesPolicy"
   statements = ["ALLOW any-user to manage file-family in compartment ${var.new_compartment_name} where request.principal.type = 'cluster'",
