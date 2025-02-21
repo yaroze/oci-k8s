@@ -4,7 +4,6 @@ terraform {
     oci = {
       source  = "oracle/oci"
       version = "~> 6.23.0"
-
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
