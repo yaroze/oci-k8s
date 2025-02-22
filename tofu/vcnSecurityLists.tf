@@ -135,6 +135,7 @@ resource "oci_core_security_list" "worker_sec_list" {
 
   egress_security_rules {
     description      = "Allow worker nodes to communicate with OKE."
+    # "all-*-services-in-oracle-services-network"
     destination      = replace(lower([for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]), " ", "-")
     destination_type = "SERVICE_CIDR_BLOCK"
     protocol         = "6"
@@ -229,6 +230,7 @@ resource "oci_core_security_list" "api_endpoint_sec_list" {
 
   egress_security_rules {
     description      = "Allow Kubernetes Control Plane to communicate with OKE"
+    # "all-*-services-in-oracle-services-network"
     destination      = replace(lower([for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]), " ", "-")
     destination_type = "SERVICE_CIDR_BLOCK"
     protocol         = "6"
@@ -242,6 +244,7 @@ resource "oci_core_security_list" "api_endpoint_sec_list" {
       type = "3"
     }
     protocol         = "1"
+    # "all-*-services-in-oracle-services-network"
     destination      = replace(lower([for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]), " ", "-")
     destination_type = "SERVICE_CIDR_BLOCK"
 
