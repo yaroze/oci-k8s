@@ -2,9 +2,6 @@
 
 [![Deploy to Oracle Cloud \(main\)](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s/archive/refs/tags/main.zip)
 
-[![Deploy to Oracle Cloud \(deploy_to_oci\)](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s/archive/refs/tags/deploy_to_oci.zip)
-
-
 This project deploys a Basic Kubernetes Cluster on OCI, using Terraform.
 
 ## Disclaimer
