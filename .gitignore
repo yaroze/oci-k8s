@@ -47,3 +47,8 @@ tofu/plan.out
 tofu/kubeconfig
 tofu-k8s/plan.out
 provider-localconfig.tf
+
+.env.sh
+tofu/kubeconfig
+.DS_Store*
+tofu/.terraform.lock.hcl
