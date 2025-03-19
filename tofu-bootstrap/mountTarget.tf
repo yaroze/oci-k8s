@@ -30,7 +30,7 @@ resource "oci_file_storage_export" "generated_oci_file_storage_export" {
 
 
 data "oci_core_subnets" "worker_subnet_default" {
-  display_name = "${module.kubeconfig.cluster_name}-worker-subnet"
+  display_name   = "${module.kubeconfig.cluster_name}-worker-subnet"
   compartment_id = var.kubernetes_compartment_ocid
 }
 
@@ -39,5 +39,5 @@ data "oci_core_subnet" "fss-subnet" {
 }
 
 data "oci_core_subnet" "worker_subnet" {
-  subnet_id = var.oci-fss-subnet-id == "" ? "not-selected" : var.oci-fss-subnet-id 
+  subnet_id = var.oci-fss-subnet-id == "" ? "not-selected" : var.oci-fss-subnet-id
 }

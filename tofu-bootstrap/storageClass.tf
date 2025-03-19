@@ -18,37 +18,19 @@ resource "kubernetes_storage_class" "oci-fss" {
   }
 }
 
-# unset the block volume storage class as default
-resource "kubernetes_storage_class" "oci-bv" {
-  count = var.oci-fss-storageclass == false ? 0 : 1
-
-  allow_volume_expansion = true
-  reclaim_policy         = "Delete"
-  volume_binding_mode    = "WaitForFirstConsumer"
+data "kubernetes_storage_class" "oci-bv" {
   metadata {
-    annotations = { "storageclass.kubernetes.io/is-default-class" : false }
-    name        = "oci-bv"
+    name = "oci-bv"
   }
-  storage_provisioner = "blockvolume.csi.oraclecloud.com"
 }
 
-# This is necessary so that the File System's root is created with the same UID as the pods
-resource "kubectl_manifest" "fss_csi_driver" {
-  count = var.oci-fss-storageclass == false ? 0 : 1
-
-  yaml_body = <<-EOF
-    apiVersion: storage.k8s.io/v1
-    kind: CSIDriver
-    metadata:
-      name: fss.csi.oraclecloud.com
-    spec:
-      attachRequired: false
-      fsGroupPolicy: File
-      podInfoOnMount: false
-      requiresRepublish: false
-      seLinuxMount: false
-      storageCapacity: false
-      volumeLifecycleModes:
-      - Persistent
-EOF
+resource "kubernetes_annotations" "oci-bv" {
+  api_version = "v1"
+  kind        = "StrorageClass"
+  metadata {
+    name = "oci-bv"
+  }
+  annotations = {
+    "storageclass.kubernetes.io/is-default-class" = false
+  }
 }
