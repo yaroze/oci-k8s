@@ -24,9 +24,10 @@ data "kubernetes_storage_class" "oci-bv" {
   }
 }
 
+# Disable the default storage class
 resource "kubernetes_annotations" "oci-bv" {
   api_version = "v1"
-  kind        = "StrorageClass"
+  kind        = "StorageClass"
   metadata {
     name = "oci-bv"
   }
