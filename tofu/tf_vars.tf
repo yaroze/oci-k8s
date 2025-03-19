@@ -14,7 +14,7 @@ variable "node_fault_domains" {
 variable "node_availability_domain" {
   description = "Node Availability Domain"
   type        = string
-  default     = "EMbB:EU-FRANKFURT-1-AD-3"
+  default     = ""
 }
 
 
@@ -33,7 +33,7 @@ variable "node_image_ocid" {
 variable "cluster_name" {
   description = "Cluster name"
   type        = string
-  default     = "kube01"
+  default     = "k8s01"
 }
 variable "ssh_public_key" {
   description = "The contents of the public key. This key will be placed on all nodes"
@@ -82,7 +82,7 @@ variable "service_subnet_cidr_block" {
 variable "new_compartment_name" {
   description = "Name of the new compartment"
   type        = string
-  default     = "Kubernetes"
+  default     = "k8s01-compartment"
 }
 
 variable "node_linux_version" {

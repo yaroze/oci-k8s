@@ -1,5 +1,5 @@
 resource "oci_identity_policy" "kubernetes_policy" {
-
+  depends_on = [ oci_identity_compartment.compartment ]
   compartment_id = var.tenancy_ocid
   description    = "Policy for Kubernetes clusters"
   name           = "KubernetesPolicy"

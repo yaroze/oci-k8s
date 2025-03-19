@@ -1,7 +1,8 @@
 
 # Routing Tables
 resource "oci_core_default_route_table" "oke_default_rt" {
-  display_name = "oke-public-routetable-${var.cluster_name}"
+  display_name = "${var.cluster_name}-default-rt"
+  compartment_id = oci_identity_compartment.compartment.id
   route_rules {
     description       = "traffic to internet"
     destination       = "0.0.0.0/0"
@@ -14,7 +15,7 @@ resource "oci_core_default_route_table" "oke_default_rt" {
 
 resource "oci_core_route_table" "routetable_KubernetesAPIendpoint" {
   compartment_id = oci_identity_compartment.compartment.id
-  display_name   = "routetable-KubernetesAPIendpoint"
+  display_name   = "${var.cluster_name}-routetable-KubernetesAPIendpoint"
 
   route_rules {
     description       = "traffic to the internet"
@@ -27,7 +28,7 @@ resource "oci_core_route_table" "routetable_KubernetesAPIendpoint" {
 
 resource "oci_core_route_table" "routetable-workernodes" {
   compartment_id = oci_identity_compartment.compartment.id
-  display_name   = "routetable-workernodes"
+  display_name   = "${var.cluster_name}-routetable-workernodes"
 
   route_rules {
     description       = "traffic to the internet"
@@ -38,7 +39,8 @@ resource "oci_core_route_table" "routetable-workernodes" {
 
   route_rules {
     description       = "traffic to OCI services"
-    destination       = [for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]
+    # "all-*-services-in-oracle-services-network"
+    destination       = replace(lower([for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]), " ", "-")
     destination_type  = "SERVICE_CIDR_BLOCK"
     network_entity_id = oci_core_service_gateway.oke_service_gateway.id
   }
@@ -47,7 +49,7 @@ resource "oci_core_route_table" "routetable-workernodes" {
 
 resource "oci_core_route_table" "routetable_serviceloadbalancers" {
   compartment_id = oci_identity_compartment.compartment.id
-  display_name   = "routetable-serviceloadbalancers"
+  display_name   = "${var.cluster_name}-routetable-serviceloadbalancers"
 
   route_rules {
     description       = "traffic to the internet"

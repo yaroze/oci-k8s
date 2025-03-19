@@ -1,4 +1,6 @@
 resource "kubernetes_namespace" "traefik" {
+  count = var.traefik == false ? 0 : 1
+
   metadata {
     name = "traefik"
   }
@@ -7,6 +9,8 @@ resource "kubernetes_namespace" "traefik" {
 # Creating a single NLB for Traefik
 # https://docs.oracle.com/en-us/iaas/Content/NetworkLoadBalancer/overview.htm
 resource "helm_release" "traefik" {
+  count = var.traefik == false ? 0 : 1
+
   depends_on = [kubernetes_namespace.traefik]
   name       = "traefik"
   repository = "https://helm.traefik.io/traefik"

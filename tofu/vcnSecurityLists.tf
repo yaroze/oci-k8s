@@ -3,7 +3,7 @@
 # https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengnetworkconfigexample.htm#example-oci-cni-publick8sapi_privateworkers_publiclb
 resource "oci_core_security_list" "service_lb_sec_list" {
   compartment_id = oci_identity_compartment.compartment.id
-  display_name   = "oke-svclbseclist-${var.cluster_name}"
+  display_name   = "${var.cluster_name}-servicelbseclist"
   vcn_id         = oci_core_vcn.oke_vcn.id
 
 
@@ -49,7 +49,7 @@ resource "oci_core_security_list" "service_lb_sec_list" {
 
 resource "oci_core_security_list" "worker_sec_list" {
   compartment_id = oci_identity_compartment.compartment.id
-  display_name   = "oke-workerseclist"
+  display_name   = "${var.cluster_name}-workerseclist"
 
   ingress_security_rules {
     description = "Allow pods on one worker node to communicate with pods on other worker nodes."
@@ -135,7 +135,8 @@ resource "oci_core_security_list" "worker_sec_list" {
 
   egress_security_rules {
     description      = "Allow worker nodes to communicate with OKE."
-    destination      = [for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]
+    # "all-*-services-in-oracle-services-network"
+    destination      = replace(lower([for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]), " ", "-")
     destination_type = "SERVICE_CIDR_BLOCK"
     protocol         = "6"
     stateless        = "false"
@@ -178,7 +179,7 @@ resource "oci_core_security_list" "worker_sec_list" {
 
 resource "oci_core_security_list" "api_endpoint_sec_list" {
   compartment_id = oci_identity_compartment.compartment.id
-  display_name   = "oke-prv-api-sl"
+  display_name   = "${var.cluster_name}-apiendpointseclist"
 
 
 
@@ -229,7 +230,8 @@ resource "oci_core_security_list" "api_endpoint_sec_list" {
 
   egress_security_rules {
     description      = "Allow Kubernetes Control Plane to communicate with OKE"
-    destination      = [for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]
+    # "all-*-services-in-oracle-services-network"
+    destination      = replace(lower([for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]), " ", "-")
     destination_type = "SERVICE_CIDR_BLOCK"
     protocol         = "6"
     stateless        = "false"
@@ -242,7 +244,8 @@ resource "oci_core_security_list" "api_endpoint_sec_list" {
       type = "3"
     }
     protocol         = "1"
-    destination      = [for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]
+    # "all-*-services-in-oracle-services-network"
+    destination      = replace(lower([for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]), " ", "-")
     destination_type = "SERVICE_CIDR_BLOCK"
 
     stateless = "false"
