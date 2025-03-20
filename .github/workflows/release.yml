@@ -19,7 +19,7 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        title: base-latest
+        title: base-stable
         workdir: ./tofu
 
     - name: Create a Release for the bootstrap applications
@@ -27,5 +27,5 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        title: bootstrap-latest
+        title: bootstrap-stable
         workdir: ./tofu-bootstrap
