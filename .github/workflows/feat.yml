@@ -43,4 +43,3 @@ jobs:
             helpers-smith.tar.gz
             helpers-smith.zip
           name: Smith (feat) ${{ github.ref }}
-          tag: ${{ github.ref }}
