@@ -18,9 +18,9 @@ jobs:
       - name: Build base & bootstrap
         run: |
           cd tofu
-          tar cvf base.tar.gz .
-          cd ../tofu-bootstrap
-          tar cvf bootstrap.tar.gz .
+          tar czvf base.tar.gz .
+          cd ../tofu-bootstrap/
+          tar czvf bootstrap.tar.gz .
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
