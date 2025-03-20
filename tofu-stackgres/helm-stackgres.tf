@@ -30,20 +30,20 @@ data "oci_objectstorage_namespace" "namespace" {
 }
 
 resource "oci_objectstorage_bucket" "stackgres_backup" {
-  compartment_id = var.kubernetes_cluster_ocid
+  compartment_id = var.kubernetes_compartment_ocid
   name           = "stackgres-backups"
   namespace      = data.oci_objectstorage_namespace.namespace.namespace
 }
 
 # Create a user for Stackgres on OCI
 resource "oci_identity_user" "stackgres" {
-  compartment_id = var.kubernetes_cluster_ocid
+  compartment_id = var.kubernetes_compartment_ocid
   description    = "IAM user for Stackgres"
   name           = "stackgres"
 }
 # Create a group for Stackgres on OCI
 resource "oci_identity_group" "stackgres" {
-  compartment_id = var.kubernetes_cluster_ocid
+  compartment_id = var.kubernetes_compartment_ocid
   description    = "IAM group for Stackgres"
   name           = "stackgres-backup-group"
 }
@@ -55,11 +55,11 @@ resource "oci_identity_user_group_membership" "stackgres_group_membership" {
 }
 
 resource "oci_identity_policy" "backup_policy" {
-  compartment_id = var.kubernetes_cluster_ocid
+  compartment_id = var.kubernetes_compartment_ocid
   description    = "Allow Stackgres to backup databases to the Bucket"
   name           = "stackgres_backups"
   statements = [
-    "ALLOW group ${oci_identity_group.stackgres.name} to use bucket on compartment id ${var.kubernetes_cluster_ocid} where target.bucket.name = '${oci_objectstorage_bucket.stackgres_backup.name}'"
+    "ALLOW group ${oci_identity_group.stackgres.name} to use bucket on compartment id ${var.kubernetes_compartment_ocid} where target.bucket.name = '${oci_objectstorage_bucket.stackgres_backup.name}'"
   ]
 }
 
