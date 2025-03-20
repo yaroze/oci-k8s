@@ -25,8 +25,8 @@ resource "helm_release" "stackgres" {
 
 data "oci_objectstorage_namespace" "namespace" {
 
-    #Optional
-    compartment_id = var.tenancy_ocid
+  #Optional
+  compartment_id = var.tenancy_ocid
 }
 
 resource "oci_objectstorage_bucket" "stackgres_backup" {
@@ -37,13 +37,14 @@ resource "oci_objectstorage_bucket" "stackgres_backup" {
 
 # Create a user for Stackgres on OCI
 resource "oci_identity_user" "stackgres" {
-  compartment_id = var.kubernetes_compartment_ocid
+  compartment_id = var.tenancy_ocid
   description    = "IAM user for Stackgres"
   name           = "stackgres"
+  email          = "stackgres@example.com"
 }
 # Create a group for Stackgres on OCI
 resource "oci_identity_group" "stackgres" {
-  compartment_id = var.kubernetes_compartment_ocid
+  compartment_id = var.tenancy_ocid
   description    = "IAM group for Stackgres"
   name           = "stackgres-backup-group"
 }
