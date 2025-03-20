@@ -58,5 +58,5 @@ data "kubernetes_ingress_v1" "stackgres_ingress_tailscale" {
 }
 
 output "stackgres_admin_ui_url" {
-  value = "https://${data.kubernetes_ingress_v1.stackgres_ingress_tailscale.status[0].load_balancer[0].ingress[0].hostname}>https://${data.kubernetes_ingress_v1.stackgres_ingress_tailscale.status[0].load_balancer[0].ingress[0].hostname}"
+  value = "https://${data.kubernetes_ingress_v1.stackgres_ingress_tailscale.status[0].load_balancer[0].ingress[0].hostname}"
 }
