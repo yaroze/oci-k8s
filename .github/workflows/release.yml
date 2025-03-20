@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Build base & bootstrap
         run: |
-          tar czvf -C tofu base.tar.gz . 
+          tar -C tofu czvf base.tar.gz . 
         #tar czvf bootstrap.tar.gz . -C tofu-bootstrap
       - name: Release
         uses: softprops/action-gh-release@v2
