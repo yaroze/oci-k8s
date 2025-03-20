@@ -1,8 +1,10 @@
 # OCI-K8s
 
-[![Deploy to Oracle Cloud \(main\)](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s/archive/refs/heads/main.zip) (main branch)
+## Base K8s infra
+[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s//releases/latest/download/base.tar.gz)
 
-[![Deploy to Oracle Cloud \(dev\)](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s/archive/refs/heads/dev.zip) (dev branch)
+## Bootstrap apps
+[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s//releases/latest/download/bootstrap.tar.gz) (dev branch)
 
 This project deploys a Basic Kubernetes Cluster on OCI, using Terraform.
 
