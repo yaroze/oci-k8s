@@ -50,3 +50,4 @@ tofu/plan.out
 **/kubeconfig
 .DS_Store*
 .env*
+debug.yml
