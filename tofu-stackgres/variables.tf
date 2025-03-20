@@ -57,6 +57,6 @@ data "kubernetes_ingress_v1" "example" {
   }
 }
 
-output "ingress_name" {
+output "stackgres_admin_ui_url" {
   value = "<a href=\"https://${data.kubernetes_ingress_v1.stackgres_ingress_tailscale.status[0].load_balancer[0].ingress[0].hostname}"
 }
