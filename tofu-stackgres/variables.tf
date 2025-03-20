@@ -50,7 +50,13 @@ output "stackgres_admin_username" {
   
 }
 
-output "stackgres_admin_ui_url" {
-  value = kubernetes_ingress_v1.stackgres_ingress_tailscale.status.loadBalancer.ingress[0].hostname
-  
+data "kubernetes_ingress_v1" "example" {
+  metadata {
+    name = "stackgres-adminui-tailscale"
+    namespace = "stackgres"
+  }
+}
+
+output "ingress_name" {
+  value = "<a href=\"https://${data.kubernetes_ingress_v1.stackgres_ingress_tailscale.status[0].load_balancer[0].ingress[0].hostname}"
 }
