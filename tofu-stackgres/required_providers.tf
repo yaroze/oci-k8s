@@ -39,3 +39,10 @@ provider "helm" {
     }
   }
 }
+
+
+module "helpers" {
+  source                      = "https://github.com/yaroze/oci-k8s/releases/latest/download/helpers.zip"
+  kubernetes_compartment_ocid = var.kubernetes_compartment_ocid
+  kubernetes_cluster_ocid     = var.kubernetes_cluster_ocid
+}

@@ -1,25 +1,23 @@
-variable "stackgres_version" {
-  description = "Version of the Stackgres Helm chart to deploy."
-  type        = string
-  default     = "1.3.0"
-}
-
-variable "os_namespace" {
-  description = "Object Storage namespace for the OCI bucket."
-  type        = string
+variable "kubernetes_cluster_ocid" {
+  description = "The OCID of the Kubernetes cluster"
+  type = string
 }
 
 variable "tenancy_ocid" {
-  description = "OCID of the tenancy where resources will be created."
+  description = "The OCID of the root compartment"
   type        = string
+}
+variable "kubernetes_compartment_ocid" {
+  description = "The OCID of the compartment where the Kubernetes cluster is located"
+  type = string
 }
 
 variable "region" {
-  description = "OCI region where the resources will be deployed."
-  type        = string
+  description = "The region where the Kubernetes cluster is located"
+  type = string
 }
 
-variable "domain_name" {
-  description = "Domain name for the Stackgres ingress."
-  type        = string
+variable "oci_profile" {
+  description = "The OCI profile to use for the OCI provider"
+  type = string
 }
