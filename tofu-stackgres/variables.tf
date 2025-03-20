@@ -50,7 +50,7 @@ output "stackgres_admin_username" {
   
 }
 
-data "kubernetes_ingress_v1" "example" {
+data "kubernetes_ingress_v1" "stackgres_ingress_tailscale" {
   metadata {
     name = "stackgres-adminui-tailscale"
     namespace = "stackgres"
