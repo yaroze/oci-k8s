@@ -51,3 +51,4 @@ tofu/plan.out
 .DS_Store*
 .env*
 debug.yml
+debug/*
