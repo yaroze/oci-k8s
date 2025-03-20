@@ -44,9 +44,9 @@ tofu/plan.out
 .vscode/*
 
 # Kubeconfig
+**/plan.out
 **/provider-localconfig.tf
-**/kubeconfig
-tofu/.terraform.lock.hcl
 **/.terraform*
+**/kubeconfig
 .DS_Store*
 .env*
