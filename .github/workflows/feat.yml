@@ -21,14 +21,14 @@ jobs:
           tar czvf bootstrap.tar.gz -C tofu-bootstrap .
           tar czvf helpers.tar.gz -C helpers .
           cd tofu
-          zip -r ../base.zip .
+          zip -r ../base-smith.zip .
           cd ..
           cd tofu-bootstrap
-          zip -r ../bootstrap.zip .
+          zip -r ../bootstrap-smith.zip .
           cd ..
           cd modules
           cd helpers
-          zip -r ../helpers.zip .
+          zip -r ../../helpers-smith.zip .
           cd ..
 
       - name: Release
@@ -36,10 +36,10 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            base.tar.gz
-            bootstrap.tar.gz
-            base.zip
-            bootstrap.zip
-            helpers.tar.gz
-            helpers.zip
+            base-smith.tar.gz
+            base-smith.zip
+            bootstrap-smith.tar.gz
+            bootstrap-smith.zip
+            helpers-smith.tar.gz
+            helpers-smith.zip
           name: Stable
