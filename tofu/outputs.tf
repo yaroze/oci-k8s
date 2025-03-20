@@ -2,10 +2,6 @@ output "nodesAvailabilityDomain" {
   value = var.node_availability_domain
 }
 
-output "mountTargetOCID" {
-  value = oci_file_storage_mount_target.filesystem_mount_target.id
-}
-
 output "workerCIDR" {
   value = var.worker_subnet_cidr_block
 }

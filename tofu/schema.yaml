@@ -55,7 +55,7 @@
       description: The name for the new compartment.
       required: true
       visible: true
-      default: "k8s-compartment"
+      default: "k8s01-compartment"
       
     cluster_name:
       type: string
@@ -71,6 +71,7 @@
       type: oci:kubernetes:versions:id
       required: true
       visible: true
+      default: "v1.32.1"
       dependsOn:
         compartmentId: ${tenancy_ocid}
         clusterOptionId: "all"
@@ -80,7 +81,7 @@
       description: The OCID of the image to use for the Kubernetes nodes. Leave empty for auto selection.
       type: string
       required: false
-      visible: true
+      visible: false
       default: ""
 
     ssh_public_key:
@@ -99,7 +100,7 @@
       description: The CIDR block for the VCN.
       type: string
       required: true
-      visible: true
+      visible: false
       default: "10.0.0.0/16"
 
     worker_subnet_cidr_block:
@@ -107,7 +108,7 @@
       description: The CIDR block for the worker subnet.
       type: string
       required: true
-      visible: true
+      visible: false
       default: "10.0.1.0/24"
 
     api_subnet_cidr_block:
@@ -115,7 +116,7 @@
       description: The CIDR block for the API subnet.
       type: string
       required: true
-      visible: true
+      visible: false
       default: "10.0.0.0/30"
         
     pod_subnet_cidr_block:
@@ -123,7 +124,7 @@
       description: The CIDR block for the pod subnet.
       type: string
       required: true
-      visible: true
+      visible: false
       default:  "10.244.0.0/16"
 
     service_subnet_cidr_block:
@@ -131,7 +132,7 @@
       description: The CIDR block for the service subnet.
       type: string
       required: true
-      visible: true
+      visible: false
       default: "10.0.2.0/24"
       
     node_linux_version:
@@ -139,7 +140,7 @@
       description: The version of the Oracle Linux image to use for the Kubernetes nodes.
       type: string
       required: true
-      visible: true
+      visible: false
       default: "8"
       
     cni_type:
@@ -164,7 +165,7 @@
       title: Node Fault Domains
       description: The fault domains for the Kubernetes nodes.
       required: false
-      visible: true
+      visible: false
       default: ["FAULT-DOMAIN-1", "FAULT-DOMAIN-2", "FAULT-DOMAIN-3"]
       additionalProps:
         allowMultiple: true
@@ -185,7 +186,7 @@
 
     node_shape:
       title: Node Shape
-      description: The shape for the Kubernetes nodes - https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm#flexible.
+      description: The <a href=https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm#flexible>shape</a> of the Kubernetes nodes.
       type: oci:core:instanceshape:name
       required: true
       visible: true
