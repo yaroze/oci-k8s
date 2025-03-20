@@ -43,3 +43,4 @@ jobs:
             helpers-cypher.tar.gz
             helpers-cypher.zip
           name: Cypher (DEV) ${{ github.ref }}
+          tag: ${{ github.ref }}
