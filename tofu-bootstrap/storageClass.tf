@@ -28,6 +28,21 @@ data "kubernetes_storage_class" "oci-bv" {
 resource "kubernetes_annotations" "oci-bv" {
   api_version = "storage.k8s.io/v1"
   kind        = "StorageClass"
+
+  # This is necessary because TF thinks there is something else managing this resource:
+  /*
+      Error: Field manager conflict
+
+      with kubernetes_annotations.oci-bv,
+      on storageClass.tf line 28, in resource "kubernetes_annotations" "oci-bv":
+      28: resource "kubernetes_annotations" "oci-bv" {
+
+      Another client is managing a field Terraform tried to update. Set "force" to true to override:
+      Apply failed with 1 conflict: conflict with "Kubernetes Java Client" using storage.k8s.io/v1:
+      .metadata.annotations.storageclass.kubernetes.io/is-default-class
+  */
+  force       = true
+
   metadata {
     name = "oci-bv"
   }
