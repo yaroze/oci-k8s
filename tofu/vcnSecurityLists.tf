@@ -3,7 +3,7 @@
 # https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengnetworkconfigexample.htm#example-oci-cni-publick8sapi_privateworkers_publiclb
 resource "oci_core_security_list" "service_lb_sec_list" {
   compartment_id = oci_identity_compartment.compartment.id
-  display_name   = "oke-svclbseclist-${var.cluster_name}"
+  display_name   = "${var.cluster_name}-servicelbseclist"
   vcn_id         = oci_core_vcn.oke_vcn.id
 
 
@@ -49,7 +49,7 @@ resource "oci_core_security_list" "service_lb_sec_list" {
 
 resource "oci_core_security_list" "worker_sec_list" {
   compartment_id = oci_identity_compartment.compartment.id
-  display_name   = "oke-workerseclist"
+  display_name   = "${var.cluster_name}-workerseclist"
 
   ingress_security_rules {
     description = "Allow pods on one worker node to communicate with pods on other worker nodes."
@@ -179,7 +179,7 @@ resource "oci_core_security_list" "worker_sec_list" {
 
 resource "oci_core_security_list" "api_endpoint_sec_list" {
   compartment_id = oci_identity_compartment.compartment.id
-  display_name   = "oke-prv-api-sl"
+  display_name   = "${var.cluster_name}-apiendpointseclist"
 
 
 

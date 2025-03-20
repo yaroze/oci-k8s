@@ -1,0 +1,219 @@
+  title: oci-k8s-bootstrap
+  description: "OCI Kubernetes Bootstrap"
+  stackDescription: "OCI Kubernetes Bootstrap"
+  schemaVersion: 1.0.0
+  version: "20250317"
+  locale: "en"
+
+  variableGroups:
+  - title: Kubernetes Configuration
+    visible: true
+    variables:
+    - kubernetes_compartment_ocid
+    - kubernetes_cluster_ocid
+
+  - title: File System Storage Class
+    visible: true
+    variables:
+    - oci-fss-storageclass
+    - oci-fss-subnet-id
+
+  - title: Traefik
+    visible: true 
+    variables:
+    - traefik
+
+  - title: Cert-Manager
+    visible: true
+    variables:
+    - cert-manager
+    - cert_manager_staging_or_production
+    - cert_manager_chart_version
+
+  - title: External-DNS
+    visible: true
+    variables:
+    - external-dns
+    - externaldns_chart_version
+
+  - title: Tailscale
+    visible: true
+    variables:
+    - tailscale
+    - tailscale_client_id
+    - tailscale_client_secret
+    - tailscale_chart_version
+
+  - title: Other
+    visible: true
+    variables:
+    - region
+
+  # - title: Bootstrap applications
+  #   visible: true
+  #   variables:
+  #   - oci-fss-storageclass
+  #   - traefik
+  #   - cert-manager
+  #   - cert_manager_staging_or_production
+  #   - cert_manager_chart_version
+  #   - external-dns
+  #   - externaldns_chart_version
+  #   - tailscale
+  #   - tailscale_client_id
+  #   - tailscale_client_secret
+  #   - tailscale_chart_version
+
+
+  - title: Extra Required Parameters
+    visible: true
+    variables:
+    - cf_email
+    - cf_api_token
+
+  variables:
+
+    tenancy_ocid:
+      type: oci:identity:tenancy:id
+      description: The Oracle Cloud Infrastructure tenancy OCID.
+      required: true
+      visible: false
+      
+    kubernetes_compartment_ocid:
+      type: oci:identity:compartment:id
+      description: "The compartment where the OKE cluster is located."
+      required: true
+      title: OKE cluster compartment
+      default: ${compartment_ocid}
+      
+    kubernetes_cluster_ocid:
+      title: OKE cluster
+      description: "The OKE cluster to deploy the bootstrap apps."
+      type: oci:container:cluster:id
+      dependsOn:
+        compartmentId: ${kubernetes_compartment_ocid}
+      required: true
+
+    traefik:
+      type: boolean
+      title: "Install Traefik?"
+      description: "Install Traefik as the ingress controller for the Kubernetes cluster."
+      required: true
+      default: true
+
+    cert-manager:
+      type: boolean
+      title: "Install Cert-Manager?"
+      description: "Install Cert-Manager for automatically managing TLS certificates."
+      required: true
+      default: true
+
+    external-dns:
+      type: boolean
+      title: "Install external-dns?"
+      description: "Install external-dns for automatically managing DNS records on Cloudflare."
+      required: true
+      default: true
+
+    tailscale: 
+      type: boolean
+      title: "Install Tailscale?"
+      description: "Install Tailscale for secure networking."
+      required: true
+      default: true
+
+    cf_email:
+      type: string
+      title: "Cloudflare email (required for external-dns and/or cert-manager)"
+      description: "The Cloudflare email address for managing DNS records."
+      required: true
+      visible: 
+        or:
+          - external-dns
+          - cert-manager
+
+    cf_api_token:
+      type: password
+      title: "Cloudflare API token (required for external-dns and/or cert-manager)"
+      description: "The Cloudflare API token for managing DNS records."
+      required: true
+      visible: 
+        or:
+          - external-dns
+          - cert-manager
+
+    cert_manager_chart_version:
+      type: string
+      title: "Cert-Manager chart version"
+      description: "The version of the Cert-Manager Helm chart to install."
+      required: true
+      visible: cert-manager
+
+    cert_manager_staging_or_production:
+      type: boolean
+      title: "🔓 Use Staging certificate provider? (unsafe) 🔓"
+      description: "Use the Let's Encrypt staging certificate provider for testing (certificates aren't accepted by browsers)."
+      required: true
+      visible: cert-manager
+      default: true
+
+    externaldns_chart_version:
+      type: string
+      title: "External-DNS chart version"
+      description: "The version of the External-DNS Helm chart to install."
+      required: true
+      visible: external-dns
+
+    tailscale_client_id:
+      type: string
+      title: "Tailscale client ID"
+      description: "The Tailscale client ID for authenticating with the Tailscale API."
+      required: true
+      visible: tailscale
+
+    tailscale_client_secret:
+      type: password
+      title: "Tailscale client key"
+      description: "The Tailscale client key for authenticating with the Tailscale API."
+      required: true
+      visible: tailscale
+
+    tailscale_chart_version:
+      type: string
+      title: "Tailscale chart version"
+      description: "The version of the Tailscale Helm chart to install."
+      required: true
+      visible: tailscale
+
+    oci_profile: 
+      type: string
+      title: "OCI Profile"
+      description: "The OCI profile to use for authenticating with the Oracle Cloud Infrastructure API."
+      required: true
+      visible: false
+      default: "DEFAULT"
+
+    workerCIDR: 
+      type: string
+      title: "Worker CIDR"
+      description: "The CIDR block for the Kubernetes worker nodes."
+      required: true
+      visible: false
+      default: "10.0.1.0/24"
+
+    oci-fss-storageclass:
+      type: boolean
+      title: "Install OCI FSS StorageClass?"
+      description: "Install the OCI FSS StorageClass for dynamic provisioning of file storage."
+      required: true
+      visible: true
+      default: true
+
+    oci-fss-subnet-id:
+      type: oci:core:subnet:id	
+      title: "FSS Subnet ID"
+      description: "The subnet ID for the OCI FSS file system. Must be accessible from worker nodes."
+      required: true
+      visible: oci-fss-storageclass
+      dependsOn:
+        compartmentId: ${kubernetes_compartment_ocid}

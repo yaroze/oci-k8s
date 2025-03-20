@@ -34,7 +34,7 @@ resource "oci_containerengine_node_pool" "pool1" {
 
   initial_node_labels {
     key   = "name"
-    value = "${var.cluster_name}-nodepool"
+    value = "${var.cluster_name}-np"
   }
   kubernetes_version = var.kubernetes_version
   node_config_details {
@@ -58,11 +58,11 @@ resource "oci_containerengine_node_pool" "pool1" {
   }
 
   node_eviction_node_pool_settings {
-    # Evict nodes after 1 minute
+
     eviction_grace_duration              = "PT1M"
     is_force_delete_after_grace_duration = "true"
   }
-  node_shape = "VM.Standard.A1.Flex"
+  node_shape = var.node_shape
   node_shape_config {
     memory_in_gbs = var.node_memory
     ocpus         = var.node_cpu
