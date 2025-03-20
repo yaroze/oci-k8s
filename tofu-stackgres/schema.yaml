@@ -17,6 +17,19 @@
     variables:
     - stackgres_chart_version
 
+
+# output variable groups
+  outputGroups:
+  - title: "Admin UI"
+    outputs:
+      - stackgres_admin_ui_url
+  
+  - title: "Credentials"
+    outputs:
+      - stackgres_admin_username
+      - stackgres_admin_password
+
+
   variables:
       
     kubernetes_compartment_ocid:
@@ -59,3 +72,26 @@
       required: true
       visible: false
       default: "DEFAULT"
+
+  outputs:
+  
+    stackgres_admin_ui_url:
+      title: "Stackgres Admin UI URL"
+      description: "The URL to access the Stackgres Admin UI."
+      value: ${stackgres_admin_ui_url}
+      visible: true
+
+    stackgres_admin_username:
+      title: "Stackgres Admin Username"
+      description: "The username to access the Stackgres Admin UI."
+      value: ${stackgres_admin_username}
+      visible: true
+    
+    stackgres_admin_password:
+      title: "Stackgres Admin Password"
+      description: "The password to access the Stackgres Admin UI."
+      value: ${stackgres_admin_password}
+      visible: true
+      sensitive: true
+
+

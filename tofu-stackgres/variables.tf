@@ -29,3 +29,28 @@ variable "tenancy_ocid" {
   description = "The OCID of the root compartment"
   type        = string
 }
+
+
+data "kubernetes_secret" "stackgres_ui_secret" {
+  metadata {
+    name = "stackgres-restapi-admin"
+    namespace = "stackgres"
+  }
+}
+
+
+output "stackgres_admin_password" {
+  value = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["clearPassword"])
+  
+}
+
+
+output "stackgres_admin_username" {
+  value = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["k8sUsername"])
+  
+}
+
+output "stackgres_admin_ui_url" {
+  value = kubernetes_ingress_v1.stackgres_ingress_tailscale.status.loadBalancer.ingress[0].hostname
+  
+}
