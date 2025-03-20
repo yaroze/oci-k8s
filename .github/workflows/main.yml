@@ -1,9 +1,9 @@
-name: Main
+name: main
 
 on:
   push:
     branches:
-      - feat/release-chart
+      - main
     tags:
       - 'v*'
 

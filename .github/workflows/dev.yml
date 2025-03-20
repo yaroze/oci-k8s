@@ -1,0 +1,40 @@
+name: dev
+
+on:
+  push:
+    branches:
+      - dev
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build base & bootstrap
+        run: |
+          tar czvf base.tar.gz -C tofu .
+          tar czvf bootstrap.tar.gz -C tofu-bootstrap .
+          cd tofu
+          zip -r ../base.zip .
+          cd ..
+          cd tofu-bootstrap
+          zip -r ../bootstrap.zip .
+          cd ..
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            base.tar.gz
+            bootstrap.tar.gz
+            base.zip
+            bootstrap.zip
+          name: Stable
