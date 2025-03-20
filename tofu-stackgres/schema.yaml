@@ -28,7 +28,7 @@
       
     kubernetes_cluster_ocid:
       title: OKE cluster
-      description: "The OKE cluster to deploy the bootstrap apps."
+      description: "The OKE cluster to deploy Stackgres."
       type: oci:container:cluster:id
       dependsOn:
         compartmentId: ${kubernetes_compartment_ocid}
