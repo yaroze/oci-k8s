@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - dev
-    tags:
-      - 'v*'
 
 permissions:
   contents: write
@@ -21,16 +19,16 @@ jobs:
         run: |
           tar czvf base.tar.gz -C tofu .
           tar czvf bootstrap.tar.gz -C tofu-bootstrap .
-          tar czvf helpers.tar.gz -C helpers .
+          tar czvf helpers.tar.gz -C modules/helpers .
           cd tofu
-          zip -r ../base.zip .
+          zip -r ../base-cypher.zip .
           cd ..
           cd tofu-bootstrap
-          zip -r ../bootstrap.zip .
+          zip -r ../bootstrap-cypher.zip .
           cd ..
           cd modules
           cd helpers
-          zip -r ../helpers.zip .
+          zip -r ../../helpers-cypher.zip .
           cd ..
 
       - name: Release
@@ -38,10 +36,10 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            base.tar.gz
-            bootstrap.tar.gz
-            base.zip
-            bootstrap.zip
-            helpers.tar.gz
-            helpers.zip
-          name: Stable
+            base-cypher.tar.gz
+            base-cypher.zip
+            bootstrap-cypher.tar.gz
+            bootstrap-cypher.zip
+            helpers-cypher.tar.gz
+            helpers-cypher.zip
+          name: Cypher (DEV) ${{ github.ref }}
