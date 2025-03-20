@@ -33,7 +33,7 @@ variable "tenancy_ocid" {
 
 data "kubernetes_secret" "stackgres_ui_secret" {
   metadata {
-    name = "stackgres-restapi-admin"
+    name      = "stackgres-restapi-admin"
     namespace = "stackgres"
   }
 }
@@ -41,22 +41,22 @@ data "kubernetes_secret" "stackgres_ui_secret" {
 
 output "stackgres_admin_password" {
   value = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["clearPassword"])
-  
+
 }
 
 
 output "stackgres_admin_username" {
   value = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["k8sUsername"])
-  
+
 }
 
 data "kubernetes_ingress_v1" "stackgres_ingress_tailscale" {
   metadata {
-    name = "stackgres-adminui-tailscale"
+    name      = "stackgres-adminui-tailscale"
     namespace = "stackgres"
   }
 }
 
 output "stackgres_admin_ui_url" {
-  value = "<a href=\"https://${data.kubernetes_ingress_v1.stackgres_ingress_tailscale.status[0].load_balancer[0].ingress[0].hostname}>https://${data.kubernetes_ingress_v1.stackgres_ingress_tailscale.status[0].load_balancer[0].ingress[0].hostname}</a>"
+  value = "https://${data.kubernetes_ingress_v1.stackgres_ingress_tailscale.status[0].load_balancer[0].ingress[0].hostname}>https://${data.kubernetes_ingress_v1.stackgres_ingress_tailscale.status[0].load_balancer[0].ingress[0].hostname}"
 }

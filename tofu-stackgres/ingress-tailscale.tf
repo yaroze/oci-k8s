@@ -1,7 +1,7 @@
 
 # Tailscale service
 resource "kubernetes_ingress_v1" "stackgres_ingress_tailscale" {
-  
+
   metadata {
     name      = "stackgres-adminui-tailscale"
     namespace = helm_release.stackgres.namespace
