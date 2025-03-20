@@ -52,3 +52,10 @@
       description: The Oracle Cloud Infrastructure region.
       required: true
       visible: false
+
+    oci_profile:
+      type: string
+      description: The Oracle Cloud Infrastructure CLI profile.
+      required: true
+      visible: false
+      default: "DEFAULT"
