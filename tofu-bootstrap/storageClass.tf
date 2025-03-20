@@ -14,7 +14,7 @@ resource "kubernetes_storage_class" "oci-fss" {
     mountTargetOcid    = oci_file_storage_mount_target.filesystem_mount_target[0].id
     exportOptions      = "[{\"source\":\"${var.workerCIDR}\",\"requirePrivilegedSourcePort\":false,\"access\":\"READ_WRITE\",\"identitySquash\":\"NONE\"}]"
     encryptInTransit   = "false"
-    availabilityDomain = module.kubeconfig.node_availability_domain
+    availabilityDomain = module.helpers.node_availability_domain
   }
 }
 
