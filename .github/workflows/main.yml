@@ -21,11 +21,16 @@ jobs:
         run: |
           tar czvf base.tar.gz -C tofu .
           tar czvf bootstrap.tar.gz -C tofu-bootstrap .
+          tar czvf helpers.tar.gz -C modules/helpers .
           cd tofu
           zip -r ../base.zip .
           cd ..
           cd tofu-bootstrap
           zip -r ../bootstrap.zip .
+          cd ..
+          cd modules
+          cd helpers
+          zip -r ../../helpers.zip .
           cd ..
 
       - name: Release
@@ -34,7 +39,9 @@ jobs:
         with:
           files: |
             base-stable.tar.gz
-            bootstrap-stable.tar.gz
             base-stable.zip
+            bootstrap-stable.tar.gz
             bootstrap-stable.zip
+            helpers.tar.gz
+            helpers.zip
           name: Stable
