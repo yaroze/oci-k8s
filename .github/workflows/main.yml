@@ -38,10 +38,10 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            base-stable.tar.gz
-            base-stable.zip
-            bootstrap-stable.tar.gz
-            bootstrap-stable.zip
+            base.tar.gz
+            base.zip
+            bootstrap.tar.gz
+            bootstrap.zip
             helpers.tar.gz
             helpers.zip
           name: Stable
