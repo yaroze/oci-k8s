@@ -21,3 +21,8 @@ variable "oci_profile" {
   description = "The OCI profile to use for the OCI provider"
   type = string
 }
+
+variable "stackgres_chart_version" {
+  description = "The version of the Stackgres Helm chart to install"
+  type = string
+}
