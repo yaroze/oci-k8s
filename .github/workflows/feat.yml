@@ -19,7 +19,7 @@ jobs:
         run: |
           tar czvf base.tar.gz -C tofu .
           tar czvf bootstrap.tar.gz -C tofu-bootstrap .
-          tar czvf helpers.tar.gz -C helpers .
+          tar czvf helpers.tar.gz -C modules/helpers .
           cd tofu
           zip -r ../base-smith.zip .
           cd ..
