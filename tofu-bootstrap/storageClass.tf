@@ -15,12 +15,8 @@ resource "kubernetes_storage_class" "oci-fss" {
     exportOptions      = "[{\"source\":\"${var.workerCIDR}\",\"requirePrivilegedSourcePort\":false,\"access\":\"READ_WRITE\",\"identitySquash\":\"NONE\"}]"
     encryptInTransit   = "false"
     availabilityDomain = module.helpers.node_availability_domain
-  }
-}
-
-data "kubernetes_storage_class" "oci-bv" {
-  metadata {
-    name = "oci-bv"
+    # This is necessary so that the FSS CSI driver creates the target FS according to the Pod securityContext.fsGroup
+    fsGroupPolicy      = "File"
   }
 }
 
@@ -41,7 +37,7 @@ resource "kubernetes_annotations" "oci-bv" {
       Apply failed with 1 conflict: conflict with "Kubernetes Java Client" using storage.k8s.io/v1:
       .metadata.annotations.storageclass.kubernetes.io/is-default-class
   */
-  force       = true
+  force = true
 
   metadata {
     name = "oci-bv"
@@ -50,3 +46,4 @@ resource "kubernetes_annotations" "oci-bv" {
     "storageclass.kubernetes.io/is-default-class" = false
   }
 }
+
