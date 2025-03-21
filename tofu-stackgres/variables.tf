@@ -12,7 +12,7 @@ variable "kubernetes_cluster_ocid" {
 variable "stackgres_chart_version" {
   description = "The version of the Stackgres Helm chart to install"
   type        = string
-  default = "1.15.2"
+  default     = "1.15.2"
 }
 
 variable "region" {
@@ -41,21 +41,26 @@ data "kubernetes_secret" "stackgres_ui_secret" {
 
 
 output "stackgres_admin_password" {
-  value = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["clearPassword"])
+  depends_on = [time_sleep.wait_5m]
+  value      = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["clearPassword"])
 
 }
 
 
 output "stackgres_admin_username" {
-  value = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["k8sUsername"])
+  depends_on = [time_sleep.wait_5m]
+  value      = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["k8sUsername"])
 
 }
 
 data "kubernetes_ingress_v1" "stackgres_ingress_tailscale" {
+  depends_on = [kubernetes_ingress_v1.stackgres_ingress_tailscale]
+
   metadata {
     name      = "stackgres-adminui-tailscale"
     namespace = "stackgres"
   }
+
 }
 
 output "stackgres_admin_ui_url" {

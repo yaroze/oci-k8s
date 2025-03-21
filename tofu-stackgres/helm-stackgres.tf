@@ -24,6 +24,12 @@ resource "helm_release" "stackgres" {
 }
 
 
+resource "time_sleep" "wait_5m" {
+  depends_on = [helm_release.stackgres]
+
+  create_duration = "5m"
+}
+
 
 # # # resource "kubernetes_ingress_v1" "stackgres_ingress" {
 # # #   metadata {

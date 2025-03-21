@@ -14,6 +14,11 @@ terraform {
       source  = "oracle/oci"
       version = "~> 6.23.0"
     }
+    # Needed to allow the creation of secrets
+    time = {
+      source  = "hashicorp/time"
+      version = "0.13.0"
+    }
   }
 }
 
