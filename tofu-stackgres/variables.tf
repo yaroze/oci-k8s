@@ -31,28 +31,6 @@ variable "tenancy_ocid" {
   type        = string
 }
 
-
-data "kubernetes_secret" "stackgres_ui_secret" {
-  metadata {
-    name      = "stackgres-restapi-admin"
-    namespace = "stackgres"
-  }
-}
-
-
-output "stackgres_admin_password" {
-  depends_on = [time_sleep.wait_5m]
-  value      = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["clearPassword"])
-
-}
-
-
-output "stackgres_admin_username" {
-  depends_on = [time_sleep.wait_5m]
-  value      = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["k8sUsername"])
-
-}
-
 data "kubernetes_ingress_v1" "stackgres_ingress_tailscale" {
   depends_on = [kubernetes_ingress_v1.stackgres_ingress_tailscale]
 
@@ -62,6 +40,32 @@ data "kubernetes_ingress_v1" "stackgres_ingress_tailscale" {
   }
 
 }
+
+# TODO: Need to find a way to retrieve the datasources
+# only after the stackgres-operator has been installed
+# and the stackgres-ui secret has been
+# created
+# data "kubernetes_secret" "stackgres_ui_secret" {
+#   depends_on = [time_sleep.wait_5m]
+#   metadata {
+#     name      = "stackgres-restapi-admin"
+#     namespace = "stackgres"
+#   }
+# }
+
+
+# output "stackgres_admin_password" {
+#   depends_on = [time_sleep.wait_5m]
+#   value      = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["clearPassword"])
+
+# }
+
+
+# output "stackgres_admin_username" {
+#   depends_on = [time_sleep.wait_5m]
+#   value      = nonsensitive(data.kubernetes_secret.stackgres_ui_secret.data["k8sUsername"])
+
+# }
 
 output "stackgres_admin_ui_url" {
   value = "https://${data.kubernetes_ingress_v1.stackgres_ingress_tailscale.status[0].load_balancer[0].ingress[0].hostname}"

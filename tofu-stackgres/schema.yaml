@@ -81,18 +81,18 @@
       visible: true
       type: link
 
-    stackgres_admin_username:
-      title: "Stackgres Admin Username"
-      description: "The username to access the Stackgres Admin UI."
-      visible: true
-      type: copyableString
+    # stackgres_admin_username:
+    #   title: "Stackgres Admin Username"
+    #   description: "The username to access the Stackgres Admin UI."
+    #   visible: true
+    #   type: copyableString
     
-    stackgres_admin_password:
-      title: "Stackgres Admin Password"
-      description: "The password to access the Stackgres Admin UI."
-      visible: true
-      sensitive: true
-      type: copyableString
+    # stackgres_admin_password:
+    #   title: "Stackgres Admin Password"
+    #   description: "The password to access the Stackgres Admin UI."
+    #   visible: true
+    #   sensitive: true
+    #   type: copyableString
 
 
 
