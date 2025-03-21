@@ -41,6 +41,29 @@ data "kubernetes_ingress_v1" "stackgres_ingress_tailscale" {
 
 }
 
+variable "create_public_url" {
+  description = "Whether to create a public URL for the Stackgres UI"
+  type        = bool
+  default     = true
+}
+
+variable "public_url" {
+  description = "The public URL to access the Stackgres Admin UI."
+  type        = string
+  default     = "stackgres.example.com"
+}
+
+variable "stackgres_use_tls_for_public_url" {
+  description = "Whether to create a certificate for the public URL"
+  type        = bool
+  default     = true
+}
+
+variable "cert_manager_use_staging_certs" {
+  description = "Whether to use the staging or production cluster issuer"
+  type        = bool
+  default     = true
+}
 # TODO: Need to find a way to retrieve the datasources
 # only after the stackgres-operator has been installed
 # and the stackgres-ui secret has been
