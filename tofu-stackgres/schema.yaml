@@ -98,11 +98,11 @@
       title: "Use Staging Certificates"
       description: "Use Let's Encrypt staging certificates for the public URL."
       required: true
+      default: true
       visible:
-        and:
+        or:
           - stackgres_use_tls_for_public_url
           - create_public_url
-      default: true
 
     public_url:
       type: string
