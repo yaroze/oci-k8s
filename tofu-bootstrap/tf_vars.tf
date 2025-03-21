@@ -90,7 +90,7 @@ variable "tailscale" {
   default     = true
 }
 
-variable "cert_manager_staging_or_production" {
+variable "cert_manager_use_staging_certs" {
   description = "Use staging certificates for cert-manager?"
   type        = bool
   default     = true
