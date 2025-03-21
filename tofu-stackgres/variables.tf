@@ -49,7 +49,7 @@ variable "create_public_url" {
 
 variable "public_url" {
   description = "The public URL to access the Stackgres Admin UI."
-  type        = bool
+  type        = string
   default     = "stackgres.example.com"
 }
 
