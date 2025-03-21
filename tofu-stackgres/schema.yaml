@@ -92,13 +92,16 @@
       required: true
       visible: create_public_url
       default: true
-    
+
     cert_manager_use_staging_certs:
       type: boolean
       title: "Use Staging Certificates"
       description: "Use Let's Encrypt staging certificates for the public URL."
       required: true
-      visible: stackgres_use_tls_for_public_url
+      visible:
+        and:
+          - stackgres_use_tls_for_public_url
+          - create_public_url
       default: true
 
     public_url:
