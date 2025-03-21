@@ -223,20 +223,18 @@
       - kubernetes_cluster_ocid
 
   outputs:
+    
+    nodesAvailabilityDomain:
+      title: Nodes Availability Domain
+      description: The availability domain for the Kubernetes nodes.
+      type: string
+    
+    k8sCompartmentID:
+      title: Kubernetes Compartment ID
+      description: The OCID of the compartment where the Kubernetes cluster is located.
+      type: ocid
+
     kubernetes_cluster_ocid:
       title: Kubernetes Cluster OCID
       description: The OCID of the Kubernetes cluster.
       type: ocid
-      required: true
-      visible: true
-      default: ""
-      sensitive: true
-
-    kubeconfig:
-      title: Kubeconfig
-      description: The kubeconfig file for the Kubernetes cluster.
-      type: copyableString
-      required: true
-      visible: true
-      default: ""
-      sensitive: true
