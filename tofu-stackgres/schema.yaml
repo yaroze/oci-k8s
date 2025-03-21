@@ -100,7 +100,7 @@
       required: true
       default: true
       visible:
-        or:
+        and:
           - stackgres_use_tls_for_public_url
           - create_public_url
 
