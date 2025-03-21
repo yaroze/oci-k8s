@@ -22,6 +22,7 @@ jobs:
           tar czvf base.tar.gz -C tofu .
           tar czvf bootstrap.tar.gz -C tofu-bootstrap .
           tar czvf helpers.tar.gz -C modules/helpers .
+          tar czvf stackgres.tar.gz -C tofu-stackgres .
           cd tofu
           zip -r ../base.zip .
           cd ..
@@ -31,6 +32,9 @@ jobs:
           cd modules
           cd helpers
           zip -r ../../helpers.zip .
+          cd ..
+          cd tofu-stackgres
+          zip -r ../stackgres.zip .
           cd ..
 
       - name: Release
@@ -44,4 +48,6 @@ jobs:
             bootstrap.zip
             helpers.tar.gz
             helpers.zip
+            stackgres.tar.gz
+            stackgres.zip
           name: Stable
