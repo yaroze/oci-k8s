@@ -11,10 +11,14 @@
     variables:
     - kubernetes_compartment_ocid
     - kubernetes_cluster_ocid
-
+    
   - title: Stackgres
     visible: true
     variables:
+    - create_public_url
+    - stackgres_use_tls_for_public_url
+    - cert_manager_use_staging_certs
+    - public_url
     - stackgres_chart_version
 
 
@@ -72,6 +76,40 @@
       required: true
       visible: false
       default: "DEFAULT"
+
+    create_public_url:
+      type: boolean
+      title: "Create Public URL"
+      description: "Create a public URL to access the Stackgres Admin UI."
+      required: true
+      visible: true
+      default: true
+
+    stackgres_use_tls_for_public_url:
+      type: boolean
+      title: "Use TLS for Public URL"
+      description: "Use TLS for the public URL to access the Stackgres Admin UI."
+      required: true
+      visible: create_public_url
+      default: true
+    
+    cert_manager_use_staging_certs:
+      type: boolean
+      title: "Use Staging Certificates"
+      description: "Use Let's Encrypt staging certificates for the public URL."
+      required: true
+      visible: stackgres_use_tls_for_public_url
+      default: true
+
+    public_url:
+      type: string
+      title: "Public URL"
+      description: "The public URL to access the Stackgres Admin UI. Requires traefik, external-dns and (ideally), cert-manager configured"
+      visible: create_public_url
+      default: "stackgres.example.com"
+
+
+
 
   # outputs:
   
