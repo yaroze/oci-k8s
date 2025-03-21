@@ -1,45 +1,45 @@
-name: dev
+# name: dev
 
-on:
-  push:
-    branches:
-      - dev
+# on:
+#   push:
+#     branches:
+#       - dev
 
-permissions:
-  contents: write
-  packages: write
+# permissions:
+#   contents: write
+#   packages: write
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Build base & bootstrap
-        run: |
-          tar czvf base.tar.gz -C tofu .
-          tar czvf bootstrap.tar.gz -C tofu-bootstrap .
-          tar czvf helpers.tar.gz -C modules/helpers .
-          cd tofu
-          zip -r ../base-cypher.zip .
-          cd ..
-          cd tofu-bootstrap
-          zip -r ../bootstrap-cypher.zip .
-          cd ..
-          cd modules
-          cd helpers
-          zip -r ../../helpers-cypher.zip .
-          cd ..
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
+#       - name: Build base & bootstrap
+#         run: |
+#           tar czvf base.tar.gz -C tofu .
+#           tar czvf bootstrap.tar.gz -C tofu-bootstrap .
+#           tar czvf helpers.tar.gz -C modules/helpers .
+#           cd tofu
+#           zip -r ../base-cypher.zip .
+#           cd ..
+#           cd tofu-bootstrap
+#           zip -r ../bootstrap-cypher.zip .
+#           cd ..
+#           cd modules
+#           cd helpers
+#           zip -r ../../helpers-cypher.zip .
+#           cd ..
 
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/heads/dev')
-        with:
-          files: |
-            base-cypher.tar.gz
-            base-cypher.zip
-            bootstrap-cypher.tar.gz
-            bootstrap-cypher.zip
-            helpers-cypher.tar.gz
-            helpers-cypher.zip
-          name: Cypher (DEV) ${{ github.ref }}
+#       - name: Release
+#         uses: softprops/action-gh-release@v2
+#         if: startsWith(github.ref, 'refs/heads/dev')
+#         with:
+#           files: |
+#             base-cypher.tar.gz
+#             base-cypher.zip
+#             bootstrap-cypher.tar.gz
+#             bootstrap-cypher.zip
+#             helpers-cypher.tar.gz
+#             helpers-cypher.zip
+#           name: Cypher (DEV) ${{ github.ref }}

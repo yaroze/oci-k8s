@@ -27,7 +27,7 @@
     visible: true
     variables:
     - cert-manager
-    - cert_manager_staging_or_production
+    - cert_manager_use_staging_certs
     - cert_manager_chart_version
 
   - title: External-DNS
@@ -55,7 +55,7 @@
   #   - oci-fss-storageclass
   #   - traefik
   #   - cert-manager
-  #   - cert_manager_staging_or_production
+  #   - cert_manager_use_staging_certs
   #   - cert_manager_chart_version
   #   - external-dns
   #   - externaldns_chart_version
@@ -149,7 +149,7 @@
       required: true
       visible: cert-manager
 
-    cert_manager_staging_or_production:
+    cert_manager_use_staging_certs:
       type: boolean
       title: "🔓 Use Staging certificate provider? (unsafe) 🔓"
       description: "Use the Let's Encrypt staging certificate provider for testing (certificates aren't accepted by browsers)."
