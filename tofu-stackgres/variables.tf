@@ -12,6 +12,7 @@ variable "kubernetes_cluster_ocid" {
 variable "stackgres_chart_version" {
   description = "The version of the Stackgres Helm chart to install"
   type        = string
+  default = "1.15.2"
 }
 
 variable "region" {
