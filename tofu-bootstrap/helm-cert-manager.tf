@@ -46,7 +46,7 @@ resource "kubectl_manifest" "cert-manager-cluster-issuer" {
       name: ${var.cert_manager_staging_or_production == true ? "letsencrypt-staging" : "letsencrypt"}
     spec: 
       acme: 
-        server: "https://acme-v02.api.letsencrypt.org/directory"
+        server: ${var.cert_manager_staging_or_production == true ? "https://acme-staging-v02.api.letsencrypt.org/directory" : "https://acme-v02.api.letsencrypt.org/directory"}
         email: ${var.cf_email}
         privateKeySecretRef: 
           name: cluster-issuer-account-key

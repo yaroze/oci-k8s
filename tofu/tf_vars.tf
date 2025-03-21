@@ -21,7 +21,7 @@ variable "node_availability_domain" {
 variable "kubernetes_version" {
   description = "Kubernetes version"
   type        = string
-  default     = "v1.31.1"
+  default     = "v1.32.1"
 }
 
 variable "node_image_ocid" {

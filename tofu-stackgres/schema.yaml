@@ -1,0 +1,98 @@
+  title: stackgres
+  description: "Install Stackgres on OCI Kubernetes"
+  stackDescription: "Install Stackgres on OCI Kubernetes"
+  schemaVersion: 1.0.0
+  version: "20250320"
+  locale: "en"
+
+  variableGroups:
+  - title: Kubernetes Configuration
+    visible: true
+    variables:
+    - kubernetes_compartment_ocid
+    - kubernetes_cluster_ocid
+
+  - title: Stackgres
+    visible: true
+    variables:
+    - stackgres_chart_version
+
+
+# output variable groups
+  # outputGroups:
+  # - title: "Admin UI"
+  #   outputs:
+  #     - stackgres_admin_ui_url
+  
+  # - title: "Credentials"
+  #   outputs:
+  #     - stackgres_admin_username
+  #     - stackgres_admin_password
+
+
+  variables:
+      
+    kubernetes_compartment_ocid:
+      type: oci:identity:compartment:id
+      description: "The compartment where the OKE cluster is located."
+      required: true
+      title: OKE cluster compartment
+      default: ${compartment_ocid}
+      
+    kubernetes_cluster_ocid:
+      title: OKE cluster
+      description: "The OKE cluster to deploy Stackgres."
+      type: oci:container:cluster:id
+      dependsOn:
+        compartmentId: ${kubernetes_compartment_ocid}
+      required: true
+
+    stackgres_chart_version:
+      type: string
+      title: "Stackgres Chart Version"
+      description: "The version of the Stackgres chart to install."
+      required: true
+      visible: true
+
+    tenancy_ocid:
+      type: oci:identity:tenancy:id
+      description: The Oracle Cloud Infrastructure tenancy OCID.
+      required: true
+      visible: false
+
+    region:
+      type: string
+      description: The Oracle Cloud Infrastructure region.
+      required: true
+      visible: false
+
+    oci_profile:
+      type: string
+      description: The Oracle Cloud Infrastructure CLI profile.
+      required: true
+      visible: false
+      default: "DEFAULT"
+
+  # outputs:
+  
+    # stackgres_admin_ui_url:
+    #   title: "Stackgres Admin UI URL"
+    #   description: "The URL to access the Stackgres Admin UI."
+    #   visible: true
+    #   type: link
+
+    # stackgres_admin_username:
+    #   title: "Stackgres Admin Username"
+    #   description: "The username to access the Stackgres Admin UI."
+    #   visible: true
+    #   type: copyableString
+    
+    # stackgres_admin_password:
+    #   title: "Stackgres Admin Password"
+    #   description: "The password to access the Stackgres Admin UI."
+    #   visible: true
+    #   sensitive: true
+    #   type: copyableString
+
+
+
