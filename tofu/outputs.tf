@@ -23,3 +23,7 @@ data "oci_containerengine_cluster_kube_config" "cluster_kube_config" {
 output "kubeconfig" {
   value = data.oci_containerengine_cluster_kube_config.cluster_kube_config.content
 }
+
+output "kubernetes_cluster_ocid" {
+  value = oci_containerengine_cluster.my_cluster.id
+}

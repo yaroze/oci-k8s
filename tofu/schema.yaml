@@ -220,8 +220,18 @@
       visible: true
       outputs:
       - kubeconfig
+      - kubernetes_cluster_ocid
 
   outputs:
+    kubernetes_cluster_ocid:
+      title: Kubernetes Cluster OCID
+      description: The OCID of the Kubernetes cluster.
+      type: ocid
+      required: true
+      visible: true
+      default: ""
+      sensitive: true
+
     kubeconfig:
       title: Kubeconfig
       description: The kubeconfig file for the Kubernetes cluster.
