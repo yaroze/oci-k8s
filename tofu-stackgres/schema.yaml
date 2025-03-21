@@ -19,15 +19,15 @@
 
 
 # output variable groups
-  outputGroups:
-  - title: "Admin UI"
-    outputs:
-      - stackgres_admin_ui_url
+  # outputGroups:
+  # - title: "Admin UI"
+  #   outputs:
+  #     - stackgres_admin_ui_url
   
-  - title: "Credentials"
-    outputs:
-      - stackgres_admin_username
-      - stackgres_admin_password
+  # - title: "Credentials"
+  #   outputs:
+  #     - stackgres_admin_username
+  #     - stackgres_admin_password
 
 
   variables:
@@ -73,13 +73,13 @@
       visible: false
       default: "DEFAULT"
 
-  outputs:
+  # outputs:
   
-    stackgres_admin_ui_url:
-      title: "Stackgres Admin UI URL"
-      description: "The URL to access the Stackgres Admin UI."
-      visible: true
-      type: link
+    # stackgres_admin_ui_url:
+    #   title: "Stackgres Admin UI URL"
+    #   description: "The URL to access the Stackgres Admin UI."
+    #   visible: true
+    #   type: link
 
     # stackgres_admin_username:
     #   title: "Stackgres Admin Username"
