@@ -32,7 +32,7 @@ jobs:
           cd modules
           cd helpers
           zip -r ../../helpers.zip .
-          cd ..
+          cd ../..
           cd tofu-stackgres
           zip -r ../stackgres.zip .
           cd ..
