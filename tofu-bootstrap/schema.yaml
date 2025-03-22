@@ -44,10 +44,6 @@
     - tailscale_client_secret
     - tailscale_chart_version
 
-  - title: Other
-    visible: true
-    variables:
-    - region
 
   # - title: Bootstrap applications
   #   visible: true
@@ -71,6 +67,11 @@
     - cf_email
     - cf_api_token
 
+  - title: Other
+    visible: false
+    variables:
+    - region
+    
   variables:
 
     tenancy_ocid:
