@@ -123,7 +123,7 @@
     tailscale_subdomain:
       type: string
       title: "Tailscale Subdomain"
-      description: "The subdomain to access the Stackgres Admin UI on your Tailnet. The URL will be https://subdomain.your-subnet.ts.net."
+      description: "The subdomain to access the Stackgres Admin UI on your Tailnet. The URL will be https://subdomain.your-tailnet.ts.net."
       visible: create_tailscale_url
       default: "stackgres-admin-ui"
 
