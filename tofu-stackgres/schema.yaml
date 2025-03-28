@@ -16,6 +16,7 @@
     visible: true
     variables:
     - create_public_url
+    - create_tailscale_url
     - stackgres_use_tls_for_public_url
     - cert_manager_use_staging_certs
     - public_url
@@ -83,6 +84,14 @@
       description: "Create a public URL to access the Stackgres Admin UI."
       required: true
       visible: true
+      default: false
+
+    create_tailscale_url:
+      type: boolean
+      title: "Create Tailscale URL"
+      description: "Create a subdomain to access the Stackgres Admin UI on your Tailnet. Requires Tailscale to be installed on the OKE cluster."
+      required: true
+      visible: true
       default: true
 
     stackgres_use_tls_for_public_url:
@@ -110,9 +119,13 @@
       description: "The public URL to access the Stackgres Admin UI. Requires traefik, external-dns and (ideally), cert-manager configured"
       visible: create_public_url
       default: "stackgres.example.com"
-
-
-
+    
+    tailscale_subdomain:
+      type: string
+      title: "Tailscale Subdomain"
+      description: "The subdomain to access the Stackgres Admin UI on your Tailnet."
+      visible: create_tailscale_url
+      default: "stackgres-admin-ui"
 
   # outputs:
   

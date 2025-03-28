@@ -53,6 +53,20 @@ variable "public_url" {
   default     = "stackgres.example.com"
 }
 
+
+variable "create_tailscale_url" {
+  description = "Whether to create a Tailscale subdomain for the Stackgres Admin UI"
+  type        = bool
+  default     = true
+}
+
+variable "tailscale_subdomain" {
+  description = "The Tailscale subdomain to access the Stackgres Admin UI."
+  type        = string
+  default     = "stackgres"
+}
+
+
 variable "stackgres_use_tls_for_public_url" {
   description = "Whether to create a certificate for the public URL"
   type        = bool
