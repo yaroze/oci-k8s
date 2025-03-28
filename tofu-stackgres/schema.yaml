@@ -15,6 +15,7 @@
   - title: Stackgres
     visible: true
     variables:
+    # - wait_for_password
     - create_public_url
     - create_tailscale_url
     - stackgres_use_tls_for_public_url
@@ -23,16 +24,6 @@
     - stackgres_chart_version
 
 
-# output variable groups
-  # outputGroups:
-  # - title: "Admin UI"
-  #   outputs:
-  #     - stackgres_admin_ui_url
-  
-  # - title: "Credentials"
-  #   outputs:
-  #     - stackgres_admin_username
-  #     - stackgres_admin_password
 
 
   variables:
@@ -116,16 +107,34 @@
     public_url:
       type: string
       title: "Public URL"
-      description: "The public URL to access the Stackgres Admin UI. Requires traefik, external-dns and (ideally), cert-manager configured"
+      description: "The public URL (FQDN) to access the Stackgres Admin UI. Requires traefik, external-dns and (ideally), cert-manager configured"
       visible: create_public_url
       default: "stackgres.example.com"
-    
+
+    wait_for_password:
+      type: boolean
+      title: "Waits for 5 minutes after applying the Helm chart to allow for the Stackgres Admin UI password to be created"
+      description: "Waits for 5 minutes for the Stackgres Admin UI password to be available. This is useful if you want to see the password on the Application tab."
+      required: true
+      visible: true
+      default: true
+      
+      
     tailscale_subdomain:
       type: string
       title: "Tailscale Subdomain"
       description: "The subdomain to access the Stackgres Admin UI on your Tailnet. The URL will be https://subdomain.your-tailnet.ts.net."
       visible: create_tailscale_url
       default: "stackgres-admin-ui"
+
+  # TODO: find a way to retrieve 
+  # outputGroups:
+  # - title: "Admin UI"
+  #   outputs:
+  #     - stackgres_admin_ui_url
+  #     - stackgres_admin_ui_tailscale
+  #     - stackgres_admin_username
+  #     - stackgres_admin_password
 
   # outputs:
   
