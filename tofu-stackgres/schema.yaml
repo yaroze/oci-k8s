@@ -111,13 +111,13 @@
       visible: create_public_url
       default: "stackgres.example.com"
 
-    wait_for_password:
-      type: boolean
-      title: "Waits for 5 minutes after applying the Helm chart to allow for the Stackgres Admin UI password to be created"
-      description: "Waits for 5 minutes for the Stackgres Admin UI password to be available. This is useful if you want to see the password on the Application tab."
-      required: true
-      visible: true
-      default: true
+    # wait_for_password:
+    #   type: boolean
+    #   title: "Waits for 5 minutes after applying the Helm chart to allow for the Stackgres Admin UI password to be created"
+    #   description: "Waits for 5 minutes for the Stackgres Admin UI password to be available. This is useful if you want to see the password on the Application tab."
+    #   required: true
+    #   visible: true
+    #   default: true
       
       
     tailscale_subdomain:
