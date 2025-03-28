@@ -78,9 +78,10 @@ variable "cert_manager_use_staging_certs" {
   type        = bool
   default     = true
 }
+
 # TODO: Need to find a way to retrieve the datasources
 # only after the stackgres-operator has been installed
-# and the stackgres-ui secret has been
+# *and* the stackgres-ui secret has been
 # created
 # data "kubernetes_secret" "stackgres_ui_secret" {
 #   depends_on = [time_sleep.wait_5m]
