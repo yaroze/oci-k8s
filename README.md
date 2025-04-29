@@ -1,6 +1,6 @@
 # OCI-K8s
 ## CI Status
-[![main status](https://github.com/yaroze/oci-k8s/actions/workflows/main.yml/badge.svg)](https://github.com/yaroze/oci-k8s/actions?query=branch%3Amain)
+[![main status](https://codeberg.org/yaroze/oci-k8s/actions/workflows/tofu-tests.yaml/badge.svg)](https://codeberg.org/yaroze/oci-k8s/actions?workflow=tofu-tests.yaml)
 
 ## Base K8s infra
 [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s/releases/latest/download/base.zip)
