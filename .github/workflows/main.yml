@@ -11,12 +11,44 @@ permissions:
   contents: write
   packages: write
 
+strategy:
+  fail-fast: false
+  matrix:        
+    directory: [ 'tofu', 'tofu-bootstrap', 'tofu-stackgres' ]
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4.1.6
+
+      
+      - name: Setup Terraform
+        uses: https://github.com/hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.5.7 # This is necessary because it's the latest version Oracle supports and it doesn't support Tofu (yet)
+
+      # This step runs in parallel for each directory in the matrix
+      - name: Running checks
+        working-directory: ./${{ matrix.directory }}
+        run: |
+          echo "--- Running Terraform Init in ${{ matrix.directory }} ---"
+          terraform init
+          echo ""
+          echo ""
+          echo "--- Running Terraform Validate in ${{ matrix.directory }} ---"
+          terraform validate
+          echo ""
+          echo ""
+          echo "--- Running Terraform Format Check in ${{ matrix.directory }} ---"
+          terraform fmt -check || (echo "ERROR: Terraform files in ${{ matrix.directory }} need formatting. Run 'terraform fmt' locally and commit changes." && exit 1)
+          echo ""
+          echo ""
+          echo "Format check passed for ${{ matrix.directory }}."
+
+
       - name: Build base & bootstrap
         run: |
           tar czvf base.tar.gz -C tofu .
