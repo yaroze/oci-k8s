@@ -16,9 +16,11 @@ This project deploys a Basic Kubernetes Cluster on OCI, using Terraform.
 ## Usage
 Usage can be found on my Medium articles, but feel free to open an issue if you have any questions :)
 
-![Part 1](https://medium.com/@plfarinha/automatically-deploying-a-basic-kubernetes-cluster-on-oracle-cloud-for-stackgres-d1ada61c46e2)
-![Part 2](https://medium.com/@plfarinha/deploying-a-basic-kubernetes-cluster-on-oracle-cloud-for-stackgres-part-2-bc6d281cd2bf)
-![Part 3](https://medium.com/@plfarinha/deploying-a-basic-kubernetes-cluster-on-oracle-cloud-for-stackgres-part-3-4d5bda66c48b)
+[Part 1](https://medium.com/@plfarinha/automatically-deploying-a-basic-kubernetes-cluster-on-oracle-cloud-for-stackgres-d1ada61c46e2)
+
+[Part 2](https://medium.com/@plfarinha/deploying-a-basic-kubernetes-cluster-on-oracle-cloud-for-stackgres-part-2-bc6d281cd2bf)
+
+[Part 3](https://medium.com/@plfarinha/deploying-a-basic-kubernetes-cluster-on-oracle-cloud-for-stackgres-part-3-4d5bda66c48b)
 
 ## Disclaimer
 I haven't had any problems with this code. However I'm not responsible if you use it.
