@@ -1,7 +1,7 @@
 
 # Routing Tables
 resource "oci_core_default_route_table" "oke_default_rt" {
-  display_name = "${var.cluster_name}-default-rt"
+  display_name   = "${var.cluster_name}-default-rt"
   compartment_id = oci_identity_compartment.compartment.id
   route_rules {
     description       = "traffic to internet"
@@ -38,7 +38,7 @@ resource "oci_core_route_table" "routetable-workernodes" {
   }
 
   route_rules {
-    description       = "traffic to OCI services"
+    description = "traffic to OCI services"
     # "all-*-services-in-oracle-services-network"
     destination       = replace(lower([for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]), " ", "-")
     destination_type  = "SERVICE_CIDR_BLOCK"

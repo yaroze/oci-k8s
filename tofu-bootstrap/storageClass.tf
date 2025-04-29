@@ -16,7 +16,7 @@ resource "kubernetes_storage_class" "oci-fss" {
     encryptInTransit   = "false"
     availabilityDomain = module.helpers.node_availability_domain
     # This is necessary so that the FSS CSI driver creates the target FS according to the Pod securityContext.fsGroup
-    fsGroupPolicy      = "File"
+    fsGroupPolicy = "File"
   }
 }
 
