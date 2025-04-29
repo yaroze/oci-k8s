@@ -29,8 +29,14 @@ jobs:
         run: |
           echo "--- Running Terraform Init in ${{ matrix.directory }} ---"
           terraform init
+          echo ""
+          echo ""
           echo "--- Running Terraform Validate in ${{ matrix.directory }} ---"
           terraform validate
+          echo ""
+          echo ""
           echo "--- Running Terraform Format Check in ${{ matrix.directory }} ---"
           terraform fmt -check || (echo "ERROR: Terraform files in ${{ matrix.directory }} need formatting. Run 'terraform fmt' locally and commit changes." && exit 1)
+          echo ""
+          echo ""
           echo "Format check passed for ${{ matrix.directory }}."
