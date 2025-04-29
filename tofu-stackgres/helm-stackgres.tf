@@ -4,6 +4,7 @@ resource "kubernetes_namespace" "stackgres" {
   }
 }
 
+
 resource "helm_release" "stackgres" {
   depends_on    = [kubernetes_namespace.stackgres]
   name          = "stackgres-operator"
