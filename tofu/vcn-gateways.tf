@@ -31,3 +31,7 @@ resource "oci_core_service_gateway" "oke_service_gateway" {
   vcn_id = oci_core_vcn.oke_vcn.id
 }
 
+locals {
+  oci_services_network_cidr = replace(lower([for s in oci_core_service_gateway.oke_service_gateway.services : s.service_name][0]), " ", "-")
+}
+
