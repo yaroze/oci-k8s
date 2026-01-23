@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
     tags:
       - 'v*'
 
@@ -83,3 +84,20 @@ jobs:
             stackgres.tar.gz
             stackgres.zip
           name: Stable
+
+      - name: Dev Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/dev'
+        with:
+          tag_name: dev
+          prerelease: true
+          files: |
+            base.tar.gz
+            base.zip
+            bootstrap.tar.gz
+            bootstrap.zip
+            helpers.tar.gz
+            helpers.zip
+            stackgres.tar.gz
+            stackgres.zip
+          name: Development
