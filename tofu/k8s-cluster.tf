@@ -2,7 +2,7 @@ resource "oci_containerengine_cluster" "my_cluster" {
   cluster_pod_network_options {
     cni_type = var.cni_type
   }
-  compartment_id = oci_identity_compartment.compartment.id
+  compartment_id = var.compartment_ocid
   endpoint_config {
     is_public_ip_enabled = "true"
     subnet_id            = oci_core_subnet.api_endpoint_subnet.id
@@ -29,7 +29,7 @@ resource "oci_containerengine_cluster" "my_cluster" {
 
 resource "oci_containerengine_node_pool" "pool1" {
   cluster_id     = oci_containerengine_cluster.my_cluster.id
-  compartment_id = oci_identity_compartment.compartment.id
+  compartment_id = var.compartment_ocid
   name           = "${var.cluster_name}-np"
 
   initial_node_labels {

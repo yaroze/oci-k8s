@@ -2,7 +2,7 @@
 # Routing Tables
 resource "oci_core_default_route_table" "oke_default_rt" {
   display_name   = "${var.cluster_name}-default-rt"
-  compartment_id = oci_identity_compartment.compartment.id
+  compartment_id = var.compartment_ocid
   route_rules {
     description       = "traffic to internet"
     destination       = "0.0.0.0/0"
@@ -14,7 +14,7 @@ resource "oci_core_default_route_table" "oke_default_rt" {
 
 
 resource "oci_core_route_table" "routetable_KubernetesAPIendpoint" {
-  compartment_id = oci_identity_compartment.compartment.id
+  compartment_id = var.compartment_ocid
   display_name   = "${var.cluster_name}-routetable-KubernetesAPIendpoint"
 
   route_rules {
@@ -27,7 +27,7 @@ resource "oci_core_route_table" "routetable_KubernetesAPIendpoint" {
 }
 
 resource "oci_core_route_table" "routetable-workernodes" {
-  compartment_id = oci_identity_compartment.compartment.id
+  compartment_id = var.compartment_ocid
   display_name   = "${var.cluster_name}-routetable-workernodes"
 
   route_rules {
@@ -48,7 +48,7 @@ resource "oci_core_route_table" "routetable-workernodes" {
 }
 
 resource "oci_core_route_table" "routetable_serviceloadbalancers" {
-  compartment_id = oci_identity_compartment.compartment.id
+  compartment_id = var.compartment_ocid
   display_name   = "${var.cluster_name}-routetable-serviceloadbalancers"
 
   route_rules {
