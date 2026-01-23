@@ -4,6 +4,11 @@ variable "tenancy_ocid" {
   type        = string
 }
 
+variable "compartment_ocid" {
+  description = "The OCID of the compartment to deploy resources in"
+  type        = string
+}
+
 variable "node_fault_domains" {
   description = "Fault domains"
   type        = list(string)
