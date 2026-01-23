@@ -24,11 +24,12 @@ This project provides three modular deployment components:
 
 ### Development (Dev Branch)
 
-| Component | Deploy |
-|-----------|--------|
-| Base Kubernetes Infrastructure | [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s/releases/download/dev/base.zip) |
-| Bootstrap Applications | [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s/releases/download/dev/bootstrap.zip) |
-| StackGres Database | [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s/releases/download/dev/stackgres.zip) |
+[![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/yaroze/oci-k8s/archive/refs/heads/dev.zip)
+
+After clicking, set the **Working Directory** to one of:
+- `oci-k8s-dev/tofu` - Base Infrastructure
+- `oci-k8s-dev/tofu-bootstrap` - Bootstrap Applications
+- `oci-k8s-dev/tofu-stackgres` - StackGres Database
 
 ## Documentation
 
