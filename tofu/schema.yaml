@@ -47,7 +47,7 @@
     cluster_name:
       type: string
       title: Cluster name
-      description: The name for the cluster.
+      description: The name for the cluster. This also determines the compartment name ({cluster_name}-compartment).
       required: true
       visible: true
       default: "k8s01"
