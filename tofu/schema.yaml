@@ -11,10 +11,10 @@
     variables:
     - tenancy_ocid
 
-  - title: Compartment Configuration
+  - title: Compartment
     visible: true
     variables:
-    - new_compartment_name
+    - compartment_ocid
 
   - title: Kubernetes
     visible: true
@@ -48,15 +48,14 @@
       description: The Oracle Cloud Infrastructure tenancy OCID.
       required: true
       visible: false
-      
-    new_compartment_name:
-      type: string
-      title: Compartment name
-      description: The name for the new compartment.
+
+    compartment_ocid:
+      type: oci:identity:compartment:id
+      title: Compartment
+      description: The compartment to deploy resources in.
       required: true
       visible: true
-      default: "k8s01-compartment"
-      
+
     cluster_name:
       type: string
       title: Cluster name

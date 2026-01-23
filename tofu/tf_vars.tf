@@ -4,6 +4,11 @@ variable "tenancy_ocid" {
   type        = string
 }
 
+variable "compartment_ocid" {
+  description = "The OCID of the compartment to deploy resources in"
+  type        = string
+}
+
 variable "node_fault_domains" {
   description = "Fault domains"
   type        = list(string)
@@ -79,11 +84,6 @@ variable "service_subnet_cidr_block" {
 }
 
 
-variable "new_compartment_name" {
-  description = "Name of the new compartment"
-  type        = string
-  default     = "k8s01-compartment"
-}
 
 variable "node_linux_version" {
   description = "Node Linux version"

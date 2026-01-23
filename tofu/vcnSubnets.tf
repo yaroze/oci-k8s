@@ -3,7 +3,7 @@
 # Public subnet
 resource "oci_core_subnet" "service_lb_subnet" {
   cidr_block                 = var.service_subnet_cidr_block
-  compartment_id             = oci_identity_compartment.compartment.id
+  compartment_id             = var.compartment_ocid
   display_name               = "${var.cluster_name}-svc-lb-subnet"
   dns_label                  = "svclbsubnet"
   prohibit_public_ip_on_vnic = "false"
@@ -14,7 +14,7 @@ resource "oci_core_subnet" "service_lb_subnet" {
 
 resource "oci_core_subnet" "worker_subnet" {
   cidr_block                 = var.worker_subnet_cidr_block
-  compartment_id             = oci_identity_compartment.compartment.id
+  compartment_id             = var.compartment_ocid
   display_name               = "${var.cluster_name}-worker-subnet"
   dns_label                  = "nodesubnet"
   prohibit_public_ip_on_vnic = "true"
@@ -26,7 +26,7 @@ resource "oci_core_subnet" "worker_subnet" {
 
 resource "oci_core_subnet" "api_endpoint_subnet" {
   cidr_block                 = var.api_subnet_cidr_block
-  compartment_id             = oci_identity_compartment.compartment.id
+  compartment_id             = var.compartment_ocid
   display_name               = "${var.cluster_name}-api-endpoint-subnet"
   dns_label                  = "apisubnet"
   prohibit_public_ip_on_vnic = "false"

@@ -6,7 +6,7 @@ TF_DIR = tofu
 TF_PLAN = plan.out
 TF_K8S_DIR = tofu-k8s
 
-CHECK_ENVVARS = TF_VAR_tenancy_ocid TF_VAR_domain_name TF_VAR_tailscale_client_secret TF_VAR_tailscale_client_id TF_VAR_os_namespace TF_VAR_cf_email TF_VAR_cf_api_token TF_VAR_ssh_public_key TF_VAR_new_compartment_name
+CHECK_ENVVARS = TF_VAR_tenancy_ocid TF_VAR_compartment_ocid TF_VAR_domain_name TF_VAR_tailscale_client_secret TF_VAR_tailscale_client_id TF_VAR_os_namespace TF_VAR_cf_email TF_VAR_cf_api_token TF_VAR_ssh_public_key
 
 # Targets
 .PHONY: init plan apply destroy clean k8s checks
