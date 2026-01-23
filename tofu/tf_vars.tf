@@ -79,11 +79,6 @@ variable "service_subnet_cidr_block" {
 }
 
 
-variable "new_compartment_name" {
-  description = "Name of the new compartment"
-  type        = string
-  default     = "k8s01-compartment"
-}
 
 variable "node_linux_version" {
   description = "Node Linux version"
