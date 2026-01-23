@@ -36,7 +36,7 @@ variable "node_image_ocid" {
   default = ""
 }
 variable "cluster_name" {
-  description = "Cluster name. Also determines compartment name ({cluster_name}-compartment)"
+  description = "Cluster name"
   type        = string
   default     = "k8s01"
 }
